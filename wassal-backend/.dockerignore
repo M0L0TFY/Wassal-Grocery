@@ -1,0 +1,20 @@
+# Standard IDE and OS files
+.DS_Store
+Thumbs.db
+*.iml
+.vscode/
+.idea/
+
+# Maven/Gradle build output
+target/
+build/
+
+# Docker/Environment files
+.git
+.env
+.dockerignore
+Dockerfile
+compose.yml
+
+# Other files
+*.log
