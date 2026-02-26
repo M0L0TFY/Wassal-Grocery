@@ -27,6 +27,12 @@ public class GlobalExceptionHandler extends RuntimeException {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ExceptionMessageResponse(ex.getMessage()));
     }
+    //409
+    @ExceptionHandler(InsufficientException.class)
+    public ResponseEntity<ExceptionMessageResponse> handleInsufficient(InsufficientException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ExceptionMessageResponse(ex.getMessage()));
+    }
     //General exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionMessageResponse> handleGeneralException(Exception ex) {
