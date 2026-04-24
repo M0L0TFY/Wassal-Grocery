@@ -6,15 +6,13 @@ Thumbs.db
 .idea/
 
 # Maven/Gradle build output
-target/
 build/
 
 # Docker/Environment files
 .git
 .env
-.dockerignore
 Dockerfile
-compose.yml
+compose.yaml
 
 # Other files
 *.log
