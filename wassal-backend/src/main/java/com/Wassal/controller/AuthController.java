@@ -5,6 +5,8 @@ import com.Wassal.dto.LoginRequest;
 import com.Wassal.dto.RegisterRequest;
 import com.Wassal.dto.UserResponse;
 import com.Wassal.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -17,14 +19,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Tag(name = "1. Auth")
 public class AuthController {
     private final AuthService authService;
 
+    @Operation(summary = "Register")
     @PostMapping("/register")
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(request));
     }
 
+    @Operation(summary = "Login")
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest request) {
         var loginResult = authService.login(request);
@@ -33,6 +38,10 @@ public class AuthController {
                 .body(loginResult.jwtResponse());
     }
 
+    @Operation(
+            summary = "Refresh Token",
+            description = "Endpoint to refresh token once it expires"
+    )
     @PostMapping("/refresh")
     public ResponseEntity<JwtResponse> refreshToken(@CookieValue("${security.jwt.cookie-name}") String refreshToken) {
         var refreshResult = authService.refreshToken(refreshToken);
@@ -41,6 +50,7 @@ public class AuthController {
                 .body(refreshResult.jwtResponse());
     }
 
+    @Operation(hidden = true)
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(@CookieValue("${security.jwt.cookie-name}") String refreshToken) {
         authService.logout(refreshToken);
