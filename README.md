@@ -28,7 +28,7 @@ cd Wassal-Grocery/wassal-backend
 ### 2. Setup Environment Variables
 Create a ``.env`` file in the root folder based on ``.env.template``.
 ```bash
-#On Linux/macOS/Git Bash:
+# On Linux/macOS/Git Bash:
 cp .env.template .env
 
 # On Windows:
